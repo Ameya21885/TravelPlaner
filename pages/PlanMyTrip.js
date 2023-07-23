@@ -93,6 +93,19 @@ const PlanMyTrip = () => {
     { id: 11, label: "South Indian", checked: false },
     { id: 12, label: "North Indian", checked: false },
   ]);
+  const [placesWishToVisit, setPlacesWishToVisit] = useState([
+    { id: 13, label: "Historical", checked: false },
+    { id: 14, label: "Forts", checked: false },
+    { id: 15, label: "Mountains", checked: false },
+    { id: 16, label: "Rivers", checked: false },
+    { id: 17, label: "Sea", checked: false },
+  ]);
+  const [parties, setParties] = useState([
+    { id: 18, label: "Pubs", checked: false },
+    { id: 19, label: "Discs", checked: false },
+    { id: 20, label: "Bars", checked: false },
+    { id: 21, label: "Thali Restaurants", checked: false },
+  ]);
 
   const handleCheckboxToggleExplorePlaces = (itemId) => {
     setExplorePlace((prevItems) =>
@@ -103,6 +116,20 @@ const PlanMyTrip = () => {
   };
   const handleCheckboxToggleFoodPreferences = (itemId) => {
     setFoodPreferences((prevItems) =>
+      prevItems.map((item) =>
+        item.id === itemId ? { ...item, checked: !item.checked } : item
+      )
+    );
+  };
+  const handleCheckboxTogglePlacesWishToVisit = (itemId) => {
+    setPlacesWishToVisit((prevItems) =>
+      prevItems.map((item) =>
+        item.id === itemId ? { ...item, checked: !item.checked } : item
+      )
+    );
+  };
+  const handleCheckboxToggleParties = (itemId) => {
+    setParties((prevItems) =>
       prevItems.map((item) =>
         item.id === itemId ? { ...item, checked: !item.checked } : item
       )
@@ -131,7 +158,15 @@ const PlanMyTrip = () => {
     const isFoodPreferenceSelected = foodPreferences.some(
       (item) => item.checked
     );
-    if (!isExplorePlaceSelected || !isFoodPreferenceSelected) {
+    const isPlacesWishToVisit = placesWishToVisit.some((item) => item.checked);
+    const isParties = parties.some((item) => item.checked);
+
+    if (
+      !isExplorePlaceSelected ||
+      !isFoodPreferenceSelected ||
+      !isPlacesWishToVisit ||
+      !isParties
+    ) {
       // Show error message or take appropriate action when validation fails
       //  alert("Please select at least one checkbox from Explore Places and Food Preferences.");
       setError(
@@ -148,6 +183,10 @@ const PlanMyTrip = () => {
     const selectedFoodPreferences = foodPreferences.filter(
       (item) => item.checked
     );
+    const selectedPlacesWishToVisit = placesWishToVisit.filter(
+      (item) => item.checked
+    );
+    const selectedParties = parties.filter((item) => item.checked);
     // console.log('Selected Food Preferences:', selectedFoodPreferences);
 
     // Create a function to convert the explorePlace and foodPreferences data into an object
@@ -168,6 +207,8 @@ const PlanMyTrip = () => {
       preferences: {
         ...convertToPreferencesObject(explorePlace),
         ...convertToPreferencesObject(foodPreferences),
+        ...convertToPreferencesObject(placesWishToVisit),
+        ...convertToPreferencesObject(parties),
       },
     };
     console.log("Postdata:", postData);
@@ -373,6 +414,36 @@ const PlanMyTrip = () => {
                           onPress={() =>
                             handleCheckboxToggleFoodPreferences(item.id)
                           }
+                          color="rgb(168, 62, 222)" // Customize the checkbox color here
+                        />
+                      ))}
+                    </View>
+
+                    {/*3.Places I wish to visit */}
+                    <View style={{ flex: 1 }}>
+                      <Text style={styles.heading}>Places I wish to visit</Text>
+                      {placesWishToVisit.map((item) => (
+                        <Checkbox.Item
+                          key={item.id}
+                          label={item.label}
+                          status={item.checked ? "checked" : "unchecked"}
+                          onPress={() =>
+                            handleCheckboxTogglePlacesWishToVisit(item.id)
+                          }
+                          color="rgb(168, 62, 222)" // Customize the checkbox color here
+                        />
+                      ))}
+                    </View>
+
+                    {/*4.Parties */}
+                    <View style={{ flex: 1 }}>
+                      <Text style={styles.heading}>Parties</Text>
+                      {parties.map((item) => (
+                        <Checkbox.Item
+                          key={item.id}
+                          label={item.label}
+                          status={item.checked ? "checked" : "unchecked"}
+                          onPress={() => handleCheckboxToggleParties(item.id)}
                           color="rgb(168, 62, 222)" // Customize the checkbox color here
                         />
                       ))}
