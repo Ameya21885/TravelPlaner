@@ -56,7 +56,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   but: {
-    width: "fit-content",
+    // width: "fit-content",
+    alignSelf: 'flex-start',
     margin: 10,
     borderRadius: 20,
   },
