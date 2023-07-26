@@ -215,7 +215,7 @@ const PlanMyTrip = () => {
 
     // Make the post request using Axios (replace the URL with your actual endpoint)
     axios
-      .post("http://127.0.0.1:5000/generate_travel_plan", postData)
+      .post("https://virenk3o.pythonanywhere.com/generate_travel_plan", postData)
       .then((response) => {
         console.log("Post Request Response:", response.data);
         setIsLoading(false);
