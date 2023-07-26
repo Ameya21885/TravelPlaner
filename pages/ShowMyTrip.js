@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, ActivityIndicator,StyleSheet } from "react-native";
+import { View, Text, ActivityIndicator, StyleSheet } from "react-native";
 // import Loader from "../components/Loader";
 
 const ShowMyTrip = ({ route }) => {
@@ -32,10 +32,10 @@ const ShowMyTrip = ({ route }) => {
   return (
     <View style={styles.container}>
       <View style={styles.one}></View>
-     <View style={styles.two}>
-     <Text style={styles.tripDataHeading}>Trip Data:</Text>
-      <Text style={styles.tripDataText}>{JSON.stringify(tripData.plan)}</Text>
-     </View>
+      <View style={styles.two}>
+        <Text style={styles.tripDataHeading}>Trip Data:</Text>
+        <Text style={styles.tripDataText}>{JSON.stringify(tripData.plan)}</Text>
+      </View>
     </View>
   );
 };
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     width: "100%",
-    height:'auto', // Take the full width
+    height: "auto", // Take the full width
     flexDirection: "row",
     flex: 1,
     backgroundColor: "#fff",
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   },
   one: {
     display: "flex",
-    width: "8%",
+    width: "4%",
     backgroundColor: "rgb(203, 179, 215)",
     height: "100%",
   },
@@ -83,4 +83,3 @@ const styles = StyleSheet.create({
     textAlign: "center", // Align text to center
   },
 });
-

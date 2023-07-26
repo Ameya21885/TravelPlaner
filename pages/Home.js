@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   },
   but: {
     // width: "fit-content",
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
     margin: 10,
     borderRadius: 20,
   },

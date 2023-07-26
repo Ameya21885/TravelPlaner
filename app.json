@@ -2,6 +2,7 @@
   "expo": {
     "name": "client-app",
     "slug": "client-app",
+    "description":"This app provides you the travel plan.",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

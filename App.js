@@ -20,6 +20,7 @@ function HomeScreen({ navigation }) {
           onPress={() => navigation.navigate("PlanMyTrip")}
         />
       </View>
+      <StatusBar style="auto" />
     </View>
   );
 }
@@ -38,10 +39,14 @@ export default function App() {
             fontWeight: "bold",
           },
           headerTitleAlign: "center",
-        }}>
+        }}
+      >
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="PlanMyTrip" component={PlanMyTrip} />
-        <Stack.Screen name="ShowMyTrip" component={ShowMyTrip} options={{
+        <Stack.Screen
+          name="ShowMyTrip"
+          component={ShowMyTrip}
+          options={{
             headerLeft: null, // Remove the back button
           }}
         />

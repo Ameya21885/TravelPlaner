@@ -522,7 +522,7 @@ const styles = StyleSheet.create({
   },
   one: {
     display: "flex",
-    width: "8%",
+    width: "4%",
     backgroundColor: "rgb(203, 179, 215)",
     // height: "auto",
     height: "100%",
