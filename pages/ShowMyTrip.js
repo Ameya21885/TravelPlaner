@@ -29,12 +29,45 @@ const ShowMyTrip = ({ route }) => {
     );
   }
 
+  // const elegant = (str) => {
+  //   if (str) {
+  //     const rm = str.replaceAll("\n", "");
+  //     const sp = rm.split("-");
+  //     const sv = rm.split(".");
+  //     // Do something with sp and sv
+  
+  //     // Example: Concatenate sp and sv and return the result
+  //     return sp.join(", ") + " - ";
+  //   }
+  //   return ""; // Return an empty string if tripData.plan is falsy
+  // };
+
+  const elegant = (str) => {
+    if (str) {
+      const lines = str.split("\n"); // Split the input string into an array of lines
+      const formattedLines = lines.map((line) => {
+        // Process each line as you wish, e.g., splitting by '-' and '.' and doing something with the parts
+        const sp = line.split("-");
+        const sv = line.split(".");
+        // Do something with sp and sv
+  
+        // Example: Concatenate sp and sv and return the result for each line
+        return sp.join(" ") + " - ";
+      });
+  
+      // Join the formatted lines back into a single string with newlines
+      return formattedLines.join("\n");
+    }
+    return ""; // Return an empty string if str is falsy
+  };
+  
+
   return (
     <View style={styles.container}>
       <View style={styles.one}></View>
       <View style={styles.two}>
         <Text style={styles.tripDataHeading}>Trip Data:</Text>
-        <Text style={styles.tripDataText}>{JSON.stringify(tripData.plan)}</Text>
+        <Text style={styles.tripDataText}>{(elegant(tripData.plan))}</Text>
       </View>
     </View>
   );
@@ -54,7 +87,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "auto", // Take the full width
     flexDirection: "row",
-    flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
@@ -80,6 +112,6 @@ const styles = StyleSheet.create({
     color: "rgb(162, 47, 220)",
   },
   tripDataText: {
-    textAlign: "center", // Align text to center
+    // textAlign: "center", // Align text to center
   },
 });

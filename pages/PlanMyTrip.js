@@ -216,6 +216,8 @@ const PlanMyTrip = () => {
     // Make the post request using Axios (replace the URL with your actual endpoint)
     axios
       .post("https://virenk3o.pythonanywhere.com/generate_travel_plan", postData)
+      // .post("http://127.0.0.1:5000/generate_travel_plan", postData)
+
       .then((response) => {
         console.log("Post Request Response:", response.data);
         setIsLoading(false);
@@ -263,25 +265,20 @@ const PlanMyTrip = () => {
     } else {
       setError("");
     }
+    handlePostRequest();
 
-    if (step === 1) {
-      // If on Step 1, proceed to Step 2
-      setStep(2);
-    } else if (step === 2) {
-      // If on Step 2, proceed to Step 3 (Save and make the post request)
-      handlePostRequest();
-    }
+ 
     // Navigate to the ShowMyTrip component and pass the data as route parameters
     // navigation.navigate("ShowMyTrip", { tripData: tripData });
 
     // Only navigate when tripData is not null (i.e., data has been received)
-    if (tripData) {
-      navigation.navigate("ShowMyTrip", { tripData: tripData });
-    } else {
-      // Handle the case when data is not available yet
-      // You can show a message or take appropriate action here
-      console.log("Data is not available yet. Please wait for the response.");
-    }
+    // if (tripData) {
+    //   navigation.navigate("ShowMyTrip", { tripData: tripData });
+    // } else {
+    //   // Handle the case when data is not available yet
+    //   // You can show a message or take appropriate action here
+    //   console.log("Data is not available yet. Please wait for the response.");
+    // }
   };
 
   return (
@@ -474,7 +471,7 @@ const PlanMyTrip = () => {
 
                     <Button
                       onPress={handleButtonPress}
-                      title={step === 1 ? "Save" : "Next"}
+                      title={step === 1 ? "Next" : "Next"}
                       color="rgb(207, 151, 234)"
                       disabled={isLoading} // Disable the button during the loading state
                     />
