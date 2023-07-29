@@ -170,7 +170,7 @@ const PlanMyTrip = () => {
       // Show error message or take appropriate action when validation fails
       //  alert("Please select at least one checkbox from Explore Places and Food Preferences.");
       setError(
-        "Please select at least one checkbox from Explore Places and Food Preferences."
+        "Please select at least one checkbox from Explore Places, Food Preferences, Places to visit and Parties."
       );
       return;
     }

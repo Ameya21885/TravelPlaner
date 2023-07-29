@@ -92,6 +92,8 @@ const styles = StyleSheet.create({
   },
   flatListContainer: {
     flex: 1,
+    paddingTop:30,
+    textAlign:'center',
   },
   tripDataContainer: {
     padding: 10,
