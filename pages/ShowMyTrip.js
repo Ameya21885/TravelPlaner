@@ -49,6 +49,7 @@ const ShowMyTrip = ({ route }) => {
         </View>
       ) : (
         <View style={styles.flatListContainer}>
+        <Text style={styles.head}>Trip Plan</Text>
           <FlatList
             data={elegant(tripData.plan)}
             renderItem={renderItem}
@@ -95,5 +96,10 @@ const styles = StyleSheet.create({
   tripDataContainer: {
     padding: 10,
   },
-  tripDataText: {},
+  head: {
+    fontSize: 25,
+    fontWeight: "bold",
+    paddingBottom: 10,
+    color: "rgb(170, 83, 213)",
+  },
 });
