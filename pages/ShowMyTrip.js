@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, ActivityIndicator, StyleSheet } from "react-native";
-// import Loader from "../components/Loader";
+import { View, Text, ActivityIndicator, StyleSheet, FlatList } from "react-native";
 
 const ShowMyTrip = ({ route }) => {
   const { tripData } = route.params;
@@ -19,56 +18,44 @@ const ShowMyTrip = ({ route }) => {
     }, 2000);
   }, [tripData]);
 
-  if (!tripData || isLoading) {
-    return (
-      <View style={styles.container}>
-        <ActivityIndicator size="large" color="rgb(207, 151, 234)" />
-        <Text style={styles.load}>Loading...</Text>
-        {/* <Loader/> */}
-      </View>
-    );
-  }
-
-  // const elegant = (str) => {
-  //   if (str) {
-  //     const rm = str.replaceAll("\n", "");
-  //     const sp = rm.split("-");
-  //     const sv = rm.split(".");
-  //     // Do something with sp and sv
-  
-  //     // Example: Concatenate sp and sv and return the result
-  //     return sp.join(", ") + " - ";
-  //   }
-  //   return ""; // Return an empty string if tripData.plan is falsy
-  // };
-
   const elegant = (str) => {
     if (str) {
-      const lines = str.split("\n"); // Split the input string into an array of lines
+      const lines = str.split("\n");
       const formattedLines = lines.map((line) => {
-        // Process each line as you wish, e.g., splitting by '-' and '.' and doing something with the parts
         const sp = line.split("-");
         const sv = line.split(".");
         // Do something with sp and sv
-  
-        // Example: Concatenate sp and sv and return the result for each line
         return sp.join(" ") + " - ";
       });
-  
-      // Join the formatted lines back into a single string with newlines
-      return formattedLines.join("\n");
+
+      return formattedLines;
     }
-    return ""; // Return an empty string if str is falsy
+    return [];
   };
-  
+
+  const renderItem = ({ item }) => (
+    <View style={styles.tripDataContainer}>
+      <Text style={styles.tripDataText}>{item}</Text>
+    </View>
+  );
 
   return (
     <View style={styles.container}>
       <View style={styles.one}></View>
-      <View style={styles.two}>
-        <Text style={styles.tripDataHeading}>Trip Data:</Text>
-        <Text style={styles.tripDataText}>{(elegant(tripData.plan))}</Text>
-      </View>
+      {isLoading || !tripData ? (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="rgb(207, 151, 234)" />
+          <Text style={styles.load}>Loading...</Text>
+        </View>
+      ) : (
+        <View style={styles.flatListContainer}>
+          <FlatList
+            data={elegant(tripData.plan)}
+            renderItem={renderItem}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        </View>
+      )}
     </View>
   );
 };
@@ -80,12 +67,12 @@ const styles = StyleSheet.create({
     color: "rgb(207, 151, 234)",
     fontSize: 25,
     fontWeight: "bold",
-    textAlign: "center", // Align text to center
+    textAlign: "center",
   },
   container: {
     display: "flex",
     width: "100%",
-    height: "auto", // Take the full width
+    height: "auto",
     flexDirection: "row",
     backgroundColor: "#fff",
     alignItems: "center",
@@ -97,21 +84,16 @@ const styles = StyleSheet.create({
     backgroundColor: "rgb(203, 179, 215)",
     height: "100%",
   },
-  two: {
-    width: "92%", // Adjust width to 92% to leave space for the border
-    margin: 0,
+  loadingContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  flatListContainer: {
+    flex: 1,
+  },
+  tripDataContainer: {
     padding: 10,
-    // borderWidth: 2, // Use borderWidth instead of border
-    // borderColor: "black", // Set border color
   },
-  tripDataHeading: {
-    fontWeight: "bold",
-    textAlign: "center", // Align text to center
-    fontSize: 20,
-    marginBottom: 10,
-    color: "rgb(162, 47, 220)",
-  },
-  tripDataText: {
-    // textAlign: "center", // Align text to center
-  },
+  tripDataText: {},
 });
